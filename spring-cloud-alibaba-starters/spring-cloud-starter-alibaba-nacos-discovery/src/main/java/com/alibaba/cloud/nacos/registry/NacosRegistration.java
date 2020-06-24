@@ -35,6 +35,8 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author xiaojing
+ *
+ * nacos中它代表了一个服务实例，它描述了关于实例的id、名称、ip、端口和元数据等等
  */
 public class NacosRegistration implements Registration, ServiceInstance {
 

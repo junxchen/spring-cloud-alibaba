@@ -28,6 +28,8 @@ import com.netflix.loadbalancer.AbstractServerList;
 /**
  * @author xiaojing
  * @author renhaojun
+ *
+ * @see com.netflix.loadbalancer.ServerList Nacos服务发现组件
  */
 public class NacosServerList extends AbstractServerList<NacosServer> {
 
@@ -49,11 +51,19 @@ public class NacosServerList extends AbstractServerList<NacosServer> {
 		return getServers();
 	}
 
+	/**
+	 * 从负载均衡ribbon组件代码跟踪过来，最后落到了getServers()方法
+	 * @return
+	 */
 	private List<NacosServer> getServers() {
 		try {
 			String group = discoveryProperties.getGroup();
+			// NamingService -》 NacosNamingService
+			// 获取服务对应的所有可用实例
 			List<Instance> instances = discoveryProperties.namingServiceInstance()
+					// 获取所有实例
 					.selectInstances(serviceId, group, true);
+			// 根据Instance List返回NacosServer List
 			return instancesToServerList(instances);
 		}
 		catch (Exception e) {

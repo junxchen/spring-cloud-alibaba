@@ -29,6 +29,16 @@ import org.springframework.util.StringUtils;
 /**
  * @author xiaojing
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
+ *
+ * NacosAutoServiceRegistration继承了抽象类AbstractAutoServiceRegistration，
+ * AbstractAutoServiceRegistration实现了标准接口AutoServiceRegistration（该接口是一个空接口），
+ * 并且实现了ApplicationListener应用监听接口去监听WebServerInitializedEvent事件，
+ * WebServerInitializedEvent事件代表了应用初始化完成
+ *
+ * 应用启动并且初始化完成之后，会回调onApplicationEvent方法，
+ * 紧接着进入到bind方法里面，然后调用了start()方法，
+ * 在start()方法里面调用了register方法
  */
 public class NacosAutoServiceRegistration
 		extends AbstractAutoServiceRegistration<Registration> {

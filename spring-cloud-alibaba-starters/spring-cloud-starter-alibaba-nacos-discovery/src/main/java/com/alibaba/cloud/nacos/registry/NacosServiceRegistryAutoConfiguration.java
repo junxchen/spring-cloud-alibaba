@@ -34,6 +34,11 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author xiaojing
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
+ * 配置类，负责实例化三个对象
+ * NacosRegistration
+ * NacosServiceRegistry
+ * NacosAutoServiceRegistration
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties

@@ -34,6 +34,8 @@ import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
  * @author xiaojing
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @author <a href="mailto:78552423@qq.com">eshun</a>
+ *
+ * 负责实现Spring Cloud标准接口ServiceRegistry的五个方法
  */
 public class NacosServiceRegistry implements ServiceRegistry<Registration> {
 
@@ -53,13 +55,16 @@ public class NacosServiceRegistry implements ServiceRegistry<Registration> {
 			return;
 		}
 
+		// 获取NamingService实例NacosNamingService，其实就是Nacos客户端里面的
 		NamingService namingService = namingService();
+		// 获取serviceId和instance
 		String serviceId = registration.getServiceId();
 		String group = nacosDiscoveryProperties.getGroup();
 
 		Instance instance = getNacosInstanceFromRegistration(registration);
 
 		try {
+			// 调用NamingService#registerInstance
 			namingService.registerInstance(serviceId, group, instance);
 			log.info("nacos registry, {} {} {}:{} register finished", group, serviceId,
 					instance.getIp(), instance.getPort());

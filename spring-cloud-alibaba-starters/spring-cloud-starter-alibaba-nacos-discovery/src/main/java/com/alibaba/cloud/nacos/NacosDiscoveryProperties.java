@@ -531,6 +531,7 @@ public class NacosDiscoveryProperties {
 		}
 
 		try {
+			// 底层通过反射创建NacosNamingService
 			namingService = NacosFactory.createNamingService(getNacosProperties());
 		}
 		catch (Exception e) {
